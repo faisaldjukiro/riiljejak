@@ -16,7 +16,8 @@
 
     .blog-image img {
         width: 1200px;
-        height: 428px;
+        /* height: 428px; */
+        height: auto;
         object-fit: constain;
     }
 
@@ -69,6 +70,32 @@
     .share-buttons a:hover {
         opacity: 0.8;
     }
+
+    .button-isal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #0d6fd1;
+        color: white;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .button-isal .btn {
+        background-color: transparent;
+        border: none;
+        color: inherit;
+        font-size: inherit;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     </style>
 </head>
 
@@ -85,7 +112,8 @@
                 <div class="back-main-menu">
                     <nav>
                         <div class="menu-toggle">
-                            <div class="logo"><a href="index.html" class="logo-text"> <img class="back-logo-dark"
+                            <div class="logo"><a href="<?= base_url('')?>" class="logo-text"> <img
+                                        class="back-logo-dark"
                                         src="<?= base_url('template/frontend/assets/')?>assets/images/logo.png"
                                         alt="logo"> <img class="back-logo-light"
                                         src="<?= base_url('template/frontend/assets/')?>assets/images/light-logo.png"
@@ -221,10 +249,10 @@
 
 
 
-                                <blockquote>Before Natalia’s village had a clean water tap, she often did have time for
+                                <!-- <blockquote>Before Natalia’s village had a clean water tap, she often did have time for
                                     school. Now, she goes to school every day she presient of her local Water Committee.
                                     <em>Max Conversion</em>
-                                </blockquote>
+                                </blockquote> -->
 
                                 <div class="blog-tags">
                                     <div class="row align-items-center">
@@ -244,126 +272,73 @@
                                     </div>
                                 </div>
 
-                                <a href="#" class="post-author">
-                                    <div class="avatar">
-                                        <img src="<?= base_url('template/frontend/assets/')?>assets/images/single-blog/1.jpg"
-                                            alt="">
-                                    </div>
-                                    <div class="info">
-                                        <h4 class="name">Sara Mening</h4>
-                                        <p>Only a quid bum bag cheeky bugger geeza car boot what a load of rubbish super
-                                            burke tomfoolery up the kyver plastered.</p>
-                                        <span class="designation">All stories by : Sara Mening</span>
-                                    </div>
-                                </a>
+
+
+                                <!-- <div class="single-nav">
+                                    <div class="back-prev"> <a href="#"><i class="fa-solid fa-arrow-right"></i>
+                                            Sebelumnya <em>Social media strategies</em></a> </div>
+
+                                    <div class="back-next"><a href="#">Selanjutnya <i
+                                                class="fa-solid fa-arrow-right"></i>
+                                            <em> Amazing theme performance</em></a></div>
+                                </div> -->
 
                                 <div class="single-nav">
-                                    <div class="back-prev"> <a href="#"><i class="fa-solid fa-arrow-right"></i>
-                                            Preovious Post <em>Social media strategies</em></a> </div>
+                                    <?php if (!empty($previous_news)): ?>
+                                    <div class="back-prev">
+                                        <a
+                                            href="<?php echo site_url('detail/' . $previous_news['tgl_berita'] . '/' . urlencode($previous_news['sub_judul'])); ?>">
+                                            <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                                            <em><?php echo $previous_news['judul']; ?></em>
+                                        </a>
+                                    </div>
+                                    <?php endif; ?>
 
-                                    <div class="back-next"><a href="#">Next Post <i class="fa-solid fa-arrow-right"></i>
-                                            <em> Amazing theme performance</em></a></div>
+                                    <?php if (!empty($next_news)): ?>
+                                    <div class="back-next">
+                                        <a
+                                            href="<?php echo site_url('detail/' . $next_news['tgl_berita'] . '/' . urlencode($next_news['sub_judul'])); ?>">
+                                            Selanjutnya <i class="fa-solid fa-arrow-right"></i>
+                                            <em><?php echo $next_news['judul']; ?></em>
+                                        </a>
+                                    </div>
+                                    <?php endif; ?>
                                 </div>
 
 
                                 <div class="back-blog-related">
                                     <div class="container">
                                         <div class="back-title back-small-title">
-                                            <h2>Related Posts</h2>
+                                            <h2>Berita Terkait</h2>
                                         </div>
                                         <ul id="back-blog-slider" class="owl-carousel owl-theme">
+                                            <?php foreach ($related_news as $related): ?>
                                             <li class="item">
                                                 <div class="back-inner">
                                                     <div class="back-blog-image">
-                                                        <a href="blog-details.html"><img
-                                                                src="<?= base_url('template/frontend/assets/')?>assets/images/related/1.jpg"
-                                                                alt=""></a>
+                                                        <a
+                                                            href="<?php echo site_url('news/detail/' . $related['tgl_berita'] . '/' . urlencode($related['sub_judul'])); ?>">
+                                                            <img src="<?php echo base_url('img/berita/' . $related['gambar']); ?>"
+                                                                style="height: 200px;" alt=" image">
+                                                        </a>
                                                     </div>
                                                     <div class="back-blog-content">
-                                                        <em class="back-blog-date">April 13, 2022</em>
-                                                        <a href="blog-details.html">
-                                                            <h3>Fostering future <br> schools & social innovation</h3>
+                                                        <em
+                                                            class="back-blog-date"><?=(tanggal_indo($related['tgl_berita'])); ?></em>
+                                                        <a
+                                                            href="<?php echo site_url('news/detail/' . $related['tgl_berita'] . '/' . urlencode($related['sub_judul'])); ?>">
+                                                            <h3><?php echo $related['judul']; ?></h3>
                                                         </a>
-                                                        <ul>
-                                                            <li class="back-author"> <span><img
-                                                                        src="<?= base_url('template/frontend/assets/')?>assets/images/author/1.jpg"
-                                                                        alt="image"></span> <a href="#">Nina Allon</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
 
-                                            <li class="item">
-                                                <div class="back-inner">
-                                                    <div class="back-blog-image">
-                                                        <a href="blog-details.html"><img
-                                                                src="<?= base_url('template/frontend/assets/')?>assets/images/related/2.jpg"
-                                                                alt=""></a>
-                                                    </div>
-                                                    <div class="back-blog-content">
-                                                        <em class="back-blog-date">May 17, 2022</em>
-                                                        <a href="blog-details.html">
-                                                            <h3>The surprising reason <br> collegeTuition is crazy..
-                                                            </h3>
-                                                        </a>
-                                                        <ul>
-                                                            <li class="back-author"> <span><img
-                                                                        src="<?= base_url('template/frontend/assets/')?>assets/images/author/2.jpg"
-                                                                        alt="image"></span> <a href="#">Nina Allon </a>
-                                                            </li>
-                                                        </ul>
                                                     </div>
                                                 </div>
                                             </li>
-
-                                            <li class="item">
-                                                <div class="back-inner">
-                                                    <div class="back-blog-image">
-                                                        <a href="blog-details.html"><img
-                                                                src="<?= base_url('template/frontend/assets/')?>assets/images/related/3.jpg"
-                                                                alt=""></a>
-                                                    </div>
-                                                    <div class="back-blog-content">
-                                                        <em class="back-blog-date">October 14, 2022</em>
-                                                        <a href="blog-details.html">
-                                                            <h3>Those other <br> college expenses about</h3>
-                                                        </a>
-                                                        <ul>
-                                                            <li class="back-author"><span><img
-                                                                        src="<?= base_url('template/frontend/assets/')?>assets/images/author/3.jpg"
-                                                                        alt="image"></span> <a href="#">Nina Allon </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-
-                                            <li class="item">
-                                                <div class="back-inner">
-                                                    <div class="back-blog-image">
-                                                        <a href="blog-details.html"><img
-                                                                src="<?= base_url('template/frontend/assets/')?>assets/images/related/4.jpg"
-                                                                alt=""></a>
-                                                    </div>
-                                                    <div class="back-blog-content">
-                                                        <em class="back-blog-date">April 19, 2022</em>
-                                                        <a href="blog-details.html">
-                                                            <h3>Fostering future <br> schools & social innovation</h3>
-                                                        </a>
-                                                        <ul>
-                                                            <li class="back-author"> <span><img
-                                                                        src="<?= base_url('template/frontend/assets/')?>assets/images/author/4.jpg"
-                                                                        alt="image"></span> <a href="#">Nina Allon </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            <?php endforeach; ?>
                                         </ul>
+
                                     </div>
                                 </div>
-                                <div class="author-comment">
+                                <!-- <div class="author-comment">
                                     <div class="back-title back-small-title">
                                         <h2>3 Comments</h2>
                                     </div>
@@ -469,7 +444,7 @@
                                             </div>
                                         </form>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

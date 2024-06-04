@@ -8,58 +8,24 @@
             <h2>Terpopuler</h2>
         </div>
         <ul class="back-hero-bottom">
+
+            </li>
+            <?php
+                            $no = 1 ;
+                            foreach($populer as $pop):?>
+
             <li>
-                <div class="image-areas">
-                    <a href="#"><img src="<?= base_url('template/frontend/assets/')?>assets/images/dont/1.jpg"
-                            alt="image"></a>
+                <div class="button-isal">
+                    <button class="btn btn-primary"><?=$no++?></button>
                 </div>
                 <div class="back-btm-content">
-                    <a href="#" class="back-cates">Politics</a>
-                    <h3><a href="#">Time can never stop for anyone</a></h3>
-                    <ul>
-                        <li class="back-date">by <a href="#">Jon Deo </a></li>
-                    </ul>
+                    <h3><a
+                            href="
+                                            <?= base_url('detail/' . url_title($pop['tgl_berita'], 'dash', TRUE) . '/' . url_title($pop['sub_judul'], 'dash', TRUE)) ?>"><?= $pop['judul'] ?></a>
+                    </h3>
                 </div>
             </li>
-            <li>
-                <div class="image-areas">
-                    <a href="#"><img src="<?= base_url('template/frontend/assets/')?>assets/images/dont/2.jpg"
-                            alt="image"></a>
-                </div>
-                <div class="back-btm-content">
-                    <a href="#" class="back-cates">Music</a>
-                    <h3><a href="#">Everyone loves to listen to music</a></h3>
-                    <ul>
-                        <li class="back-date">by <a href="#">Jon Deo </a></li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div class="image-areas">
-                    <a href="#"><img src="<?= base_url('template/frontend/assets/')?>assets/images/dont/3.jpg"
-                            alt="image"></a>
-                </div>
-                <div class="back-btm-content">
-                    <a href="#" class="back-cates">Lifestyle</a>
-                    <h3><a href="#">10 easy habits to make your life</a></h3>
-                    <ul>
-                        <li class="back-date">by <a href="#">Jon Deo </a></li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div class="image-areas">
-                    <a href="#"><img src="<?= base_url('template/frontend/assets/')?>assets/images/dont/4.jpg"
-                            alt="image"></a>
-                </div>
-                <div class="back-btm-content">
-                    <a href="#" class="back-cates">Travel</a>
-                    <h3><a href="#">World tranding best 10 website</a></h3>
-                    <ul>
-                        <li class="back-date">by <a href="#">Jon Deo </a></li>
-                    </ul>
-                </div>
-            </li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </div>

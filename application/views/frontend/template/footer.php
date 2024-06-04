@@ -4,7 +4,7 @@
             <div class="col-lg-6 md-mb-30">
                 <div class="footer-widget footer-widget-1">
                     <div class="footer-logo white">
-                        <a href="index.html" class="logo-text"> <img
+                        <a href="<?php echo base_url('') ?>" class="logo-text"> <img
                                 src="<?= base_url('template/frontend/assets/') ?>assets/images/light-logo.png"
                                 alt="logo"></a>
                     </div>

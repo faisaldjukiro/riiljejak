@@ -3,7 +3,7 @@
         <div class="back-main-menu">
             <nav>
                 <div class="menu-toggle">
-                    <div class="logo"><a href="index.html" class="logo-text"> <img class="back-logo-dark"
+                    <div class="logo"><a href="<?= base_url('') ?>" class="logo-text"> <img class="back-logo-dark"
                                 src="<?= base_url('template/frontend/assets/')?>assets/images/logo.png" alt="logo"> <img
                                 class="back-logo-light"
                                 src="<?= base_url('template/frontend/assets/')?>assets/images/light-logo.png"

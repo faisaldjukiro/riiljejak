@@ -162,14 +162,14 @@
         const roleId = $(this).data('role');
 
         $.ajax({
-            url: "<?= base_url('settings/changeAccess'); ?>",
+            url: "<?= base_url('rj/settings/changeAccess'); ?>",
             type: 'post',
             data: {
                 menuId: menuId,
                 roleId: roleId
             },
             success: function() {
-                window.location.href = "<?= base_url('settings/roleaccess/'); ?>" + roleId;
+                window.location.href = "<?= base_url('rj/settings/roleaccess/'); ?>" + roleId;
             }
         });
     });

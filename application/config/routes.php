@@ -89,7 +89,6 @@ $route['detail/(:any)/(:any)'] = 'BeritaController/detail/$1/$2';
 
 
 
-
 $route['tentang-kami'] = "FooterController/tentang_kami";
 $route['redaksi'] = "FooterController/redaksi";
 $route['kontak'] = "FooterController/kontak";

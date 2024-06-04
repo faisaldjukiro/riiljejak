@@ -98,6 +98,7 @@ class BeritaController extends CI_Controller
                 ];
     
                 if ($this->db->insert('tb_berita', $insert_data)) {
+                    $this->sendWhatsAppNotification();
                     $this->session->set_flashdata('message_type', 'success');
                     $this->session->set_flashdata('message', 'Berita Berhasil ditambahkan!');
                    
@@ -221,5 +222,18 @@ class BeritaController extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-info" role="alert">Berita Berhasil diedit!</div>');
         }
         
+    }
+    private function sendWhatsAppNotification() {
+        $this->load->library('twilio');
+
+        $twilio_number = 'whatsapp:+6285240655479';
+        $receiver_numbers = ['whatsapp:+6282296715197'];
+        // $receiver_numbers = ['whatsapp:+6282296715197', 'whatsapp:+6285311326323'];
+        $message = 'Berita baru telah ditambahkan!';
+    
+        // Kirim pesan WhatsApp ke setiap nomor penerima
+        foreach ($receiver_numbers as $receiver_number) {
+            $this->twilio->sendMessage($twilio_number, $receiver_number, $message);
+        }
     }
 }

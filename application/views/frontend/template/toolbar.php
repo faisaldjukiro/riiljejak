@@ -22,8 +22,10 @@
                     <div class="toolbar-sl-share">
                         <ul>
                             <li class="back-follow">Ikuti Kami</li>
-                            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                            <li><a href="https://facebook.com/profile.php?id=61559886661864" target="_blank"><i
+                                        class="fa-brands fa-facebook-f"></i></a></li>
+                            <li><a href="https://www.instagram.com/riiljejak.id/" target="_blank"><i
+                                        class="fa-brands fa-instagram"></i></a></li>
                             <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
                             <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
                             <li><a href="<?= base_url('rj/login')?>"><i class="fa fa-lock"></i></a></li>

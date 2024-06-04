@@ -5,31 +5,29 @@
         <li> <a href="<?= base_url('berita')?>">Berita</a>
             <ul>
                 <li><a href="<?= base_url('internasional')?>">Internasional</a></li>
-                <li><a href="<?= base_url('nasional')?>">Nasional</a>
+                <li><a href="<?= base_url('nasional')?>">Nasional</a></li>
+                <li><a href="<?= base_url('nasional/hukum')?>">Hukum</a></li>
+                <li><a href="<?= base_url('nasional/politik')?>">Politik</a></li>
+                <li><a href="<?= base_url('nasional/pemerintahan')?>">Pemerintahan</a></li>
+
+            </ul>
+        </li>
+        <li><a href="<?= base_url('daerah')?>">Daerah</a>
+            <ul>
+                <li><a href="<?= base_url('daerah/sulawesi-utara')?>">Sulawesi Utara</a>
                     <ul>
-                        <li><a href="<?= base_url('nasional/hukum')?>">Hukum</a></li>
-                        <li><a href="<?= base_url('nasional/politik')?>">Politik</a></li>
-                        <li><a href="<?= base_url('nasional/pemerintahan')?>">Pemerintahan</a></li>
+                        <li><a href="<?= base_url('daerah/sulawesi-utara/bolmut')?>">Bolmut</a></li>
+                        <li><a href="<?= base_url('daerah/sulawesi-utara/bolsel')?>">Bolsel</a></li>
+                        <li><a href="<?= base_url('daerah/sulawesi-utara/boltim')?>">Boltim</a></li>
                     </ul>
                 </li>
-                <li><a href="<?= base_url('daerah')?>">Daerah</a>
+                <li><a href="<?= base_url('daerah/gorontalo')?>">Gorontalo</a>
                     <ul>
-                        <li><a href="<?= base_url('daerah/sulawesi-utara')?>">Sulawesi Utara</a>
-                            <ul>
-                                <li><a href="<?= base_url('daerah/sulawesi-utara/bolmut')?>">Bolmut</a></li>
-                                <li><a href="<?= base_url('daerah/sulawesi-utara/bolsel')?>">Bolsel</a></li>
-                                <li><a href="<?= base_url('daerah/sulawesi-utara/boltim')?>">Boltim</a></li>
-                            </ul>
+                        <li><a href="<?= base_url('daerah/gorontalo/kota-gorontalo')?>">Kota Gorontalo</a>
                         </li>
-                        <li><a href="<?= base_url('daerah/gorontalo')?>">Gorontalo</a>
-                            <ul>
-                                <li><a href="<?= base_url('daerah/gorontalo/kota-gorontalo')?>">Kota Gorontalo</a>
-                                </li>
-                                <li><a href="<?= base_url('daerah/gorontalo/kabupaten-gorontalo')?>">Kabupaten
-                                        Gorontalo</a></li>
-                                <li><a href=" <?= base_url('daerah/gorontalo/gorontalo-utara')?>">Gorontalo Utara</a>
-                                </li>
-                            </ul>
+                        <li><a href="<?= base_url('daerah/gorontalo/kabupaten-gorontalo')?>">Kabupaten
+                                Gorontalo</a></li>
+                        <li><a href=" <?= base_url('daerah/gorontalo/gorontalo-utara')?>">Gorontalo Utara</a>
                         </li>
                     </ul>
                 </li>
@@ -47,6 +45,8 @@
                 <li> <a href="<?= base_url('ragam/kesehatan')?>">Kesehatan</a></li>
                 <li> <a href="<?= base_url('ragam/olahraga')?>">Olahraga</a></li>
                 <li> <a href="<?= base_url('ragam/religi')?>">Religi</a></li>
+                <li> <a href="<?= base_url('ragam/pendidikan')?>">Pendidikan</a></li>
+                <li> <a href="<?= base_url('ragam/hibuaran')?>">Hiburan</a></li>
             </ul>
         </li>
         <li> <a href="<?= base_url('galeri')?>">Galeri</a>
