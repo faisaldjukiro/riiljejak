@@ -39,13 +39,22 @@
     .image-wrapper {
         display: flex;
         justify-content: center;
+<<<<<<< HEAD
         align-items: center;
         object-fit: cover;
+=======
+        /* Pusatkan gambar secara horizontal */
+        align-items: center;
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
     }
 
     .image-wrapper img {
         max-width: 200px;
         height: auto;
+<<<<<<< HEAD
+=======
+        /* Sesuaikan tinggi secara otomatis */
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
         border-radius: 5px;
     }
 
@@ -85,6 +94,7 @@
         margin-bottom: 20px;
     }
 
+<<<<<<< HEAD
     .back-dark .popular-card {
         background: #152b59;
         border: 1px solid #000;
@@ -112,6 +122,27 @@
         padding-left: 25px;
     }
 
+=======
+    .popular-card h4 {
+        margin-top: 0;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .popular-list {
+        counter-reset: list-counter;
+        padding-left: 20px;
+    }
+
+    .popular-list li {
+        counter-increment: list-counter;
+        margin-bottom: 10px;
+        list-style: none;
+        position: relative;
+        padding-left: 25px;
+    }
+
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
     .popular-list li::before {
         content: counter(list-counter);
         position: absolute;
@@ -121,6 +152,7 @@
         color: #007bff;
     }
 
+<<<<<<< HEAD
     .back-dark .popular-list li::before {
         content: counter(list-counter);
         position: absolute;
@@ -130,16 +162,21 @@
         color: #ff003c;
     }
 
+=======
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
     .popular-list li a {
         text-decoration: none;
         color: #000;
     }
 
+<<<<<<< HEAD
     .back-dark .popular-list li a {
         text-decoration: none;
         color: #ffffff;
     }
 
+=======
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
     .popular-list li a:hover {
         text-decoration: underline;
     }
@@ -300,9 +337,13 @@
                                 <div class="image-wrapper">
                                     <a
                                         href="<?= base_url('detail/' . url_title($item['tgl_berita'], 'dash', TRUE) . '/' . url_title($item['sub_judul'], 'dash', TRUE)) ?>">
+<<<<<<< HEAD
                                         <img style="width: 1024px !important; height: 200px !important; object-fit: cover !important;"
                                             src="
                                             <?= base_url('img/berita/' . $item['gambar']); ?>" alt="image">
+=======
+                                        <img src="<?= base_url('img/berita/' . $item['gambar']); ?>" alt="image">
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
                                     </a>
                                 </div>
                                 <div class="back-btm-content">
@@ -319,7 +360,11 @@
                         </div>
                         <div class="right-column">
                             <div class="popular-card">
+<<<<<<< HEAD
                                 <h4><strong>Terpopuler</strong></h4>
+=======
+                                <h4 style="color: #007bff"><strong>Terpopuler</strong></h4>
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
                                 <ol class="popular-list">
                                     <?php foreach ($populer as $pop): ?>
                                     <li><a

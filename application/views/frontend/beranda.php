@@ -192,8 +192,12 @@
                                     <a
                                         href="<?= base_url('detail/' . url_title($nasional['tgl_berita'], 'dash', TRUE) . '/' . url_title($nasional['sub_judul'], 'dash', TRUE)) ?>"><img
                                             src="<?= base_url('img/berita/' . $nasional['gambar']); ?>"
+<<<<<<< HEAD
                                             style="width: 200px !important; height: 100px !important; object-fit: cover !important;"
                                             alt="image"></a>
+=======
+                                            style="width: 200px !important; height: 100px !important;" alt="image"></a>
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
                                 </div>
                                 <div class="back-btm-content">
                                     <a href="<?= $nasional['url']?>" class="back-cates"
@@ -213,8 +217,12 @@
                                     <a
                                         href="<?= base_url('detail/' . url_title($politik['tgl_berita'], 'dash', TRUE) . '/' . url_title($politik['sub_judul'], 'dash', TRUE)) ?>"><img
                                             src="<?= base_url('img/berita/' . $politik['gambar']); ?>"
+<<<<<<< HEAD
                                             style="width: 200px !important; height: 100px !important; object-fit: cover !important;"
                                             alt="image"></a>
+=======
+                                            style="width: 200px !important; height: 100px !important;" alt="image"></a>
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
                                 </div>
                                 <div class="back-btm-content">
                                     <a href="<?= $politik['url']?>" class="back-cates"
@@ -233,8 +241,12 @@
                                     <a
                                         href="<?= base_url('detail/' . url_title($pemerintahan['tgl_berita'], 'dash', TRUE) . '/' . url_title($pemerintahan['sub_judul'], 'dash', TRUE)) ?>"><img
                                             src="<?= base_url('img/berita/' . $pemerintahan['gambar']); ?>"
+<<<<<<< HEAD
                                             style="width: 200px !important; height: 100px !important; object-fit: cover !important;"
                                             alt="image"></a>
+=======
+                                            style="width: 200px !important; height: 100px !important;" alt="image"></a>
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
                                 </div>
                                 <div class="back-btm-content">
                                     <a href="<?= $pemerintahan['url']?>" class="back-cates"
@@ -252,6 +264,7 @@
                             <li>
                                 <div class="image-areas">
                                     <a
+<<<<<<< HEAD
                                         href="<?= base_url('detail/' . url_title($hukum['tgl_berita'], 'dash', TRUE) . '/' . url_title($hukum['sub_judul'], 'dash', TRUE)) ?>"><img
                                             src="<?= base_url('img/berita/' . $hukum['gambar']); ?>"
                                             style="width: 200px !important; height: 100px !important; object-fit: cover !important;"
@@ -306,6 +319,19 @@
                                             href="<?= base_url('detail/' . url_title($olahraga['tgl_berita'], 'dash', TRUE) . '/' . url_title($olahraga['sub_judul'], 'dash', TRUE)) ?>"><?= $olahraga['judul']?></a>
                                     </h3>
                                     <ul class="back-meta">
+=======
+                                        href="<?= base_url('detail/' . url_title($olahraga['tgl_berita'], 'dash', TRUE) . '/' . url_title($olahraga['sub_judul'], 'dash', TRUE)) ?>"><img
+                                            src="<?= base_url('img/berita/' . $olahraga['gambar']); ?>"
+                                            style="width: 200px !important; height: 100px !important;" alt="image"></a>
+                                </div>
+                                <div class="back-btm-content">
+                                    <a href="<?= $olahraga['url']?>" class="back-cates"
+                                        style="color: #ff1100 !important"><strong><?= $olahraga['nm_kategori_master']?></strong></a>
+                                    <h3><a
+                                            href="<?= base_url('detail/' . url_title($olahraga['tgl_berita'], 'dash', TRUE) . '/' . url_title($olahraga['sub_judul'], 'dash', TRUE)) ?>"><?= $olahraga['judul']?></a>
+                                    </h3>
+                                    <ul class="back-meta">
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
                                         <li class="back-author"><a href="#">By <?= $olahraga['nama']?></a>
                                         </li>
                                     </ul>
@@ -334,7 +360,10 @@
                                 <div class="image-areas">
                                     <a
                                         href="<?= base_url('detail/' . url_title($baru['tgl_berita'], 'dash', TRUE) . '/' . url_title($baru['sub_judul'], 'dash', TRUE)) ?>"><img
+<<<<<<< HEAD
                                             style="width: 1024px !important; height: 150px !important; object-fit: cover !important;"
+=======
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
                                             src="<?= base_url('img/berita/' . $baru['gambar']); ?>" alt="image"></a>
                                 </div>
                                 <div class="back-btm-content">

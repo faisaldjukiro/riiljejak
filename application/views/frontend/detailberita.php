@@ -288,7 +288,11 @@
                                     <div class="back-prev">
                                         <a
                                             href="<?php echo site_url('detail/' . $previous_news['tgl_berita'] . '/' . urlencode($previous_news['sub_judul'])); ?>">
+<<<<<<< HEAD
                                             <i class="fa-solid fa-arrow-right"></i> Sebelumnya
+=======
+                                            <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
                                             <em><?php echo $previous_news['judul']; ?></em>
                                         </a>
                                     </div>
@@ -317,7 +321,11 @@
                                                 <div class="back-inner">
                                                     <div class="back-blog-image">
                                                         <a
+<<<<<<< HEAD
                                                             href="<?php echo site_url('detail/' . $related['tgl_berita'] . '/' . urlencode($related['sub_judul'])); ?>">
+=======
+                                                            href="<?php echo site_url('news/detail/' . $related['tgl_berita'] . '/' . urlencode($related['sub_judul'])); ?>">
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
                                                             <img src="<?php echo base_url('img/berita/' . $related['gambar']); ?>"
                                                                 style="height: 200px;" alt=" image">
                                                         </a>
@@ -326,7 +334,11 @@
                                                         <em
                                                             class="back-blog-date"><?=(tanggal_indo($related['tgl_berita'])); ?></em>
                                                         <a
+<<<<<<< HEAD
                                                             href="<?php echo site_url('detail/' . $related['tgl_berita'] . '/' . urlencode($related['sub_judul'])); ?>">
+=======
+                                                            href="<?php echo site_url('news/detail/' . $related['tgl_berita'] . '/' . urlencode($related['sub_judul'])); ?>">
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
                                                             <h3><?php echo $related['judul']; ?></h3>
                                                         </a>
 

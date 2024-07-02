@@ -15,8 +15,11 @@ class BerandaController extends CI_Controller
         $data['pemerintahan'] = $this->_pemerintahan();
         $data['olahraga'] = $this->_olahraga();
         $data['nasional'] = $this->_nasional();
+<<<<<<< HEAD
         $data['religi'] = $this->_religi();
         $data['hukum'] = $this->_hukum();
+=======
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
         $this->load->view('frontend/beranda',$data);
     }
 
@@ -28,6 +31,12 @@ class BerandaController extends CI_Controller
         $this->db->order_by('a.id_berita', 'DESC');
         $query = $this->db->get();
         $results = $query->result_array();
+<<<<<<< HEAD
+=======
+        // foreach ($results as &$result) {
+        //     $result['judul'] = $this->limit_words($result['judul'], 8);
+        // }
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
         return $results;
     }
 
@@ -53,8 +62,11 @@ class BerandaController extends CI_Controller
         $this->db->from("tb_berita a");
         $this->db->join('tb_kategori_master b', 'b.id_kat_master = a.id_kategori');
         $this->db->join('user c', 'c.id_user = a.id_user');
+<<<<<<< HEAD
         $this->db->where('a.aktif',"Y");
         $this->db->where('a.status',1);
+=======
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
         $this->db->order_by('a.id_berita', 'DESC');
         $this->db->limit(10);
         $query = $this->db->get();
@@ -69,8 +81,11 @@ class BerandaController extends CI_Controller
         $this->db->from("tb_berita a");
         $this->db->join('tb_kategori_master b', 'b.id_kat_master = a.id_kategori');
         $this->db->join('user c', 'c.id_user = a.id_user');
+<<<<<<< HEAD
         $this->db->where('a.aktif',"Y");
         $this->db->where('a.status',1);
+=======
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
         $this->db->order_by('a.dibaca', 'DESC');
         $this->db->limit(10);
         $query = $this->db->get();
@@ -85,8 +100,11 @@ class BerandaController extends CI_Controller
         $this->db->join('tb_kategori_master b', 'b.id_kat_master = a.id_kategori');
         $this->db->join('user c', 'c.id_user = a.id_user');
         $this->db->where("a.id_kategori", "3");
+<<<<<<< HEAD
         $this->db->where('a.aktif',"Y");
         $this->db->where('a.status',1);
+=======
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
         $this->db->order_by('a.id_berita', 'DESC');
         $query = $this->db->get();
         $results = $query->row_array();
@@ -99,9 +117,13 @@ class BerandaController extends CI_Controller
         $this->db->from("tb_berita a");
         $this->db->join('tb_kategori_master b', 'b.id_kat_master = a.id_kategori');
         $this->db->join('user c', 'c.id_user = a.id_user');
+<<<<<<< HEAD
         $this->db->where("a.id_kategori", "4");
         $this->db->where('a.aktif',"Y");
         $this->db->where('a.status',1);
+=======
+        $this->db->where("a.id_kategori", "5");
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
         $this->db->order_by('a.id_berita', 'DESC');
         $query = $this->db->get();
         $results = $query->row_array();
@@ -115,8 +137,11 @@ class BerandaController extends CI_Controller
         $this->db->join('tb_kategori_master b', 'b.id_kat_master = a.id_kategori');
         $this->db->join('user c', 'c.id_user = a.id_user');
         $this->db->where("a.id_kategori", "20");
+<<<<<<< HEAD
         $this->db->where('a.aktif',"Y");
         $this->db->where('a.status',1);
+=======
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
         $this->db->order_by('a.id_berita', 'DESC');
         $query = $this->db->get();
         $results = $query->row_array();
@@ -129,13 +154,17 @@ class BerandaController extends CI_Controller
         $this->db->join('tb_kategori_master b', 'b.id_kat_master = a.id_kategori');
         $this->db->join('user c', 'c.id_user = a.id_user');
         $this->db->where("a.id_kategori", "22");
+<<<<<<< HEAD
         $this->db->where('a.aktif',"Y");
         $this->db->where('a.status',1);
+=======
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
         $this->db->order_by('a.id_berita', 'DESC');
         $query = $this->db->get();
         $results = $query->row_array();
         return $results;
     }
+<<<<<<< HEAD
     public function _religi()
     {
         $this->db->select("IF(LENGTH(a.judul) > 50, CONCAT(LEFT(a.judul, 50), '...'), a.judul) AS judul, a.sub_judul, a.tgl_berita, a.gambar,b.nm_kategori_master,c.nama,b.url");
@@ -165,6 +194,9 @@ class BerandaController extends CI_Controller
             $results = $query->row_array();
             return $results;
     }
+=======
+
+>>>>>>> 1d39c107c2d1737e018be66a266c8e840c8a0a4d
 
     private function limit_words($string, $word_limit)
     {
