@@ -60,12 +60,12 @@
                     </div>
                     <small class="text-danger"><?= form_error('password'); ?></small>
 
-                    <div class="p-t-12">
+                    <!-- <div class="p-t-12">
                         <a class="txt2" href="<?php echo base_url('lupapassword') ?>">
                             &nbsp; Lupa Password ?
                         </a>
 
-                    </div>
+                    </div> -->
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn">
                             Login

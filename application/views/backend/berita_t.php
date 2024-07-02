@@ -86,7 +86,10 @@
                             <form id="editForm" action="<?= base_url('rj/berita/tambah') ?>" method="post"
                                 enctype="multipart/form-data">
                                 <input type="hidden" class="form-control" name="id_user" value="<?= $user['id_user']?>">
-                                <div class="row mb-3">
+                                <input type="hidden" class="form-control" name="role_id"
+                                    value="<?= $user['role_id'] ?>">
+                                <input type="hidden" class="form-control" name="jam" id="jam">
+                                <div class=" row mb-3">
                                     <label class="col-sm-2 col-form-label">Judul Berita</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="judul" required>
@@ -107,7 +110,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Sub Kategori</label>
+                                    <label class="col-sm-2 col-form-label">Menu Kategori</label>
                                     <div class="col-sm-10">
                                         <div class="row">
                                             <?php foreach ($kategori as $kat): ?>
@@ -331,7 +334,20 @@
         });
     });
     </script>
+    <script>
+    function updateTime() {
+        var now = new Date();
+        var hours = now.getHours().toString().padStart(2, '0');
+        var minutes = now.getMinutes().toString().padStart(2, '0');
+        var seconds = now.getSeconds().toString().padStart(2, '0');
+        var currentTime = hours + ':' + minutes + ':' + seconds;
+        document.getElementById('jam').value = currentTime;
+    }
 
+    updateTime();
+
+    setInterval(updateTime, 1000);
+    </script>
 
 </body>
 

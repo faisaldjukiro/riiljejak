@@ -65,6 +65,31 @@
     .share-buttons a:hover {
         opacity: 0.8;
     }
+     .button-isal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #0d6fd1;
+        color: white;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .button-isal .btn {
+        background-color: transparent;
+        border: none;
+        color: inherit;
+        font-size: inherit;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     </style>
 </head>
 

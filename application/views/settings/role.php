@@ -26,7 +26,7 @@
             <h1>Role Management</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="<?= base_url('')?>">Beranda</a></li>
+                    <li class="breadcrumb-item"><a href="<?= base_url('rj/')?>">Beranda</a></li>
                     <li class="breadcrumb-item active">Role Management</li>
                 </ol>
             </nav>
@@ -61,7 +61,7 @@
                                         </th>
                                         <td scope="row"><?= $m['role']?></td>
                                         <td scope="row">
-                                            <a href="<?= base_url('settings/roleaccess/') . $m['role_id']; ?>"
+                                            <a href="<?= base_url('rj/settings/roleaccess/') . $m['role_id']; ?>"
                                                 class="badge bg-warning" title="Access"><i class="bi bi-lock"></i>
                                                 Access</a>
                                         </td>

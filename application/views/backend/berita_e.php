@@ -89,11 +89,11 @@
 
                                     <label class="col-sm-2 col-form-label">Judul Berita</label>
                                     <div class="col-sm-10">
+                                        <input type="hidden" name="role_id" value="<?=$user['role_id']?>">
                                         <input type="text" class="form-control" name="judul"
                                             value="<?= $berita['judul']?>" required>
                                     </div>
                                 </div>
-
 
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Kategori</label>
@@ -111,7 +111,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Sub Kategori</label>
+                                    <label class="col-sm-2 col-form-label">Menu Kategori</label>
                                     <div class="col-sm-10">
                                         <div class="row">
                                             <?php foreach ($kategori as $kat): ?>

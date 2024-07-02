@@ -89,7 +89,6 @@ $route['detail/(:any)/(:any)'] = 'BeritaController/detail/$1/$2';
 
 
 
-
 $route['tentang-kami'] = "FooterController/tentang_kami";
 $route['redaksi'] = "FooterController/redaksi";
 $route['kontak'] = "FooterController/kontak";
@@ -133,3 +132,4 @@ $route['rj/berita'] = 'backend/BeritaController';
 $route['rj/berita/tambah'] = 'backend/BeritaController/t_berita';
 $route['rj/berita/detail/(:any)'] = 'backend/BeritaController/detail/$1';
 $route['rj/berita/edit/(:any)'] = 'backend/BeritaController/edit/$1';
+$route['rj/berita/hapus/(:any)'] = 'backend/BeritaController/hapus/$1';

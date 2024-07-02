@@ -1,7 +1,9 @@
 <!--================= Meta tag =================-->
 <meta charset="utf-8">
 <title><?=$title?> - Riiljejak.id</title>
-<meta name="description" content="">
+<!--<meta name="description" content="">-->
+<!--<meta name="description google-adsense-account" content="ca-pub-6198656092690595">-->
+<meta name="google-adsense-account" content="ca-pub-6198656092690595">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="apple-touch-icon" href="<?= base_url('template/frontend/assets/') ?>assets/images/fav.png">
@@ -16,6 +18,11 @@
 <link rel="stylesheet" type="text/css" href="<?= base_url('template/frontend/assets/') ?>style.css">
 <link rel="stylesheet" type="text/css" href="<?= base_url('template/frontend/assets/') ?>assets/css/back-spacing.css">
 <link rel="stylesheet" type="text/css" href="<?= base_url('template/frontend/assets/') ?>assets/css/responsive.css">
+<!-- Iklan -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6198656092690595"
+    crossorigin="anonymous"></script>
+
+
 
 <style>
 .verified-container {
@@ -55,20 +62,41 @@
     font-weight: bold;
 }
 
-/* Responsiveness */
 @media (max-width: 576px) {
     .verified-container {
-        flex-direction: column;
-        align-items: flex-start;
+        background-color: #19274e;
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .checkmark {
-        margin-right: 0;
-        margin-bottom: 10px;
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
     }
 
-    .text-content {
-        align-items: flex-start;
+    .text-contentt {
+        display: flex;
+        flex-direction: column;
     }
-}
+
+    .titlee {
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .verified-by,
+    .certificate {
+        margin: 0;
+
+    }
+
+    .certificate .number {
+        font-weight: bold;
+    }
 </style>

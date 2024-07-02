@@ -12,66 +12,182 @@
         color: #037cd4;
     }
 
+    .isal-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .left-column {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .right-column {
+        flex: 1;
+        margin-left: 20px;
+    }
+
+    .isal-item {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+    }
+
     .image-wrapper {
-        width: 100%;
-        height: 300px;
-        overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        object-fit: cover;
     }
 
     .image-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 8px;
-        background-color: #f0f0f0;
+        max-width: 200px;
+        height: auto;
+        border-radius: 5px;
     }
 
+    .back-btm-content {
+        margin-left: 15px;
+    }
 
-    .isal-item {
-        border: none;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+    .viral-label .back-cates {
+        color: red;
+        font-weight: bold;
+    }
+
+    .date {
+        display: block;
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 5px;
+    }
+
+    h3 a {
+        font-size: 18px;
+        margin: 10px 0;
+        color: #000000;
+    }
+
+    .back-dark h3 a {
+        font-size: 18px;
+        margin: 10px 0;
+        color: #ffffff;
+    }
+
+    .popular-card {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
         padding: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        background-color: #fff;
-        margin-bottom: 16px;
-        min-height: 450px;
-        flex: 1 1 calc(33.333% - 16px);
+        margin-bottom: 20px;
     }
 
-
-
-    .back-dark .isal-item {
-        background-color: #0c0d0d;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        color: #ccc;
+    .back-dark .popular-card {
+        background: #152b59;
+        border: 1px solid #000;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 20px;
     }
 
+    .popular-card h4 {
+        margin-top: 0;
+        text-align: center;
+        font-weight: bold;
+    }
 
+    .popular-list {
+        counter-reset: list-counter;
+        padding-left: 20px;
+    }
 
-    @media (max-width: 768px) {
-        .isal-item {
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-            flex: 1 1 100%;
-            min-height: auto;
+    .popular-list li {
+        counter-increment: list-counter;
+        margin-bottom: 10px;
+        list-style: none;
+        position: relative;
+        padding-left: 25px;
+    }
+
+    .popular-list li::before {
+        content: counter(list-counter);
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 20px;
+        color: #007bff;
+    }
+
+    .back-dark .popular-list li::before {
+        content: counter(list-counter);
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 20px;
+        color: #ff003c;
+    }
+
+    .popular-list li a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    .back-dark .popular-list li a {
+        text-decoration: none;
+        color: #ffffff;
+    }
+
+    .popular-list li a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+        .isal-container {
+            flex-direction: column;
         }
-    }
 
-    .isal-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-    }
+        .right-column {
+            margin-left: 0;
+            margin-top: 20px;
+        }
 
-    .col-lg-4 {
-        flex: 1 1 calc(33.333% - 16px);
-        box-sizing: border-box;
+        .date {
+            font-size: 10px;
+            margin-bottom: 2px;
+        }
+
+        h3 a {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .back-dark h3 a {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .viral-label .back-cates {
+            font-size: 12px;
+        }
+
+        .back-btm-content {
+            margin-left: 10px;
+        }
+
+        .isal-item {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .image-wrapper img {
+            max-width: 90%;
+            height: auto;
+            margin-bottom: 10px;
+        }
     }
     </style>
 </head>
@@ -85,7 +201,8 @@
                 <div class="back-main-menu">
                     <nav>
                         <div class="menu-toggle">
-                            <div class="logo"><a href="index.html" class="logo-text"> <img class="back-logo-dark"
+                            <div class="logo"><a href="<?= base_url('')?>" class="logo-text"> <img
+                                        class="back-logo-dark"
                                         src="<?= base_url('template/frontend/assets/')?>assets/images/logo.png"
                                         alt="logo"> <img class="back-logo-light"
                                         src="<?= base_url('template/frontend/assets/')?>assets/images/light-logo.png"
@@ -177,48 +294,50 @@
                 <br>
                 <div class="row">
                     <div class="isal-container">
-                        <?php foreach ($berita as $item): ?>
-                        <div class="col-lg-4 isal-item">
-                            <div class="image-wrapper">
-                                <a
-                                    href="<?= base_url('detail/' . url_title($item['tgl_berita'], 'dash', TRUE) . '/' . url_title($item['sub_judul'], 'dash', TRUE)) ?>"><img
-                                        src="<?= base_url('img/berita/' . $item['gambar']); ?>" alt="image"></a>
-                            </div>
-                            <div class="back-btm-content">
-                                <a href="<?= base_url($title)?>" class="back-cates"><?= $title ?></a>
-                                <h3>
+                        <div class="left-column">
+                            <?php foreach ($berita as $item): ?>
+                            <div class="col-lg-12 isal-item">
+                                <div class="image-wrapper">
                                     <a
-                                        href="<?= base_url('detail/' . url_title($item['tgl_berita'], 'dash', TRUE) . '/' . url_title($item['sub_judul'], 'dash', TRUE)) ?>"><?= $item['judul'] ?></a>
-                                </h3>
-                                <ul>
-                                    <li class="back-author">BY&nbsp;<a href="#"><?= $item['nama'] ?></a></li>
-                                    <li class="back-date">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="15"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-calendar">
-                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                                <line x1="3" y1="10" x2="21" y2="10"></line>
-                                            </svg>
-                                        </span>
-                                        <?= tanggal_indo($item['tgl_berita']); ?>
+                                        href="<?= base_url('detail/' . url_title($item['tgl_berita'], 'dash', TRUE) . '/' . url_title($item['sub_judul'], 'dash', TRUE)) ?>">
+                                        <img style="width: 1024px !important; height: 200px !important; object-fit: cover !important;"
+                                            src="
+                                            <?= base_url('img/berita/' . $item['gambar']); ?>" alt="image">
+                                    </a>
+                                </div>
+                                <div class="back-btm-content">
+                                    <span class="viral-label"><a href="<?= base_url($item['url'])?>"
+                                            class="back-cates"><?= $item['nm_kategori_master'] ?></a></span>
+                                    <span class="date"><?= tanggal_indo($item['tgl_berita'],$item['jam']); ?></span>
+                                    <h3>
+                                        <a
+                                            href="<?= base_url('detail/' . url_title($item['tgl_berita'], 'dash', TRUE) . '/' . url_title($item['sub_judul'], 'dash', TRUE)) ?>"><?= $item['judul'] ?></a>
+                                    </h3>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="right-column">
+                            <div class="popular-card">
+                                <h4><strong>Terpopuler</strong></h4>
+                                <ol class="popular-list">
+                                    <?php foreach ($populer as $pop): ?>
+                                    <li><a
+                                            href="<?= base_url('detail/' . url_title($pop['tgl_berita'], 'dash', TRUE) . '/' . url_title($pop['sub_judul'], 'dash', TRUE)) ?>"><?= $pop['judul'] ?></a>
                                     </li>
-                                </ul>
-                                <p><?= $item['isi_berita'] ?></p>
+                                    <?php endforeach; ?>
+                                </ol>
                             </div>
                         </div>
-                        <?php endforeach; ?>
                     </div>
+
                 </div>
-                <ul class="back-pagination mt-30">
+                <!-- <ul class="back-pagination mt-30">
                     <li><a href="#">1</a></li>
                     <li><a href="#">2</a></li>
                     <li><a href="#">3</a></li>
                     <li class="back-next"><a href="#">Next<i class="arrow_carrot-right"></i></a></li>
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>
@@ -240,6 +359,7 @@
         }
     });
     </script>
+
 </body>
 
 </html>

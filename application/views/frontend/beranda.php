@@ -19,7 +19,6 @@
         .main-image img {
             height: auto;
             max-height: 200px;
-            /* Atur tinggi maksimum gambar untuk tampilan mobile */
         }
     }
 
@@ -50,6 +49,38 @@
         width: 100%;
         height: auto;
     }
+
+    @media (max-width: 768px) {
+        .thumbnail {
+            display: none;
+        }
+    }
+
+    .button-isal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #3b5998;
+        color: white;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .button-isal .btn {
+        background-color: transparent;
+        border: none;
+        color: inherit;
+        font-size: inherit;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     </style>
 </head>
 
@@ -72,7 +103,7 @@
                             <a
                                 href="<?= base_url('detail/' . url_title($head['tgl_berita'], 'dash', TRUE) . '/' . url_title($head['sub_judul'], 'dash', TRUE)) ?>"><img
                                     src="<?= base_url('img/berita/' . $head['gambar']); ?>" alt="image"
-                                    style="width: 100px !important; height: 70px !important;"></a>
+                                    style="width: 100px !important; height: 70px !important; object-fit: cover !important;"></a>
                         </div>
                         <div class="back-btm-content">
                             <h3><a
@@ -95,7 +126,7 @@
                                     <div class="main-image">
                                         <div class="image-area">
                                             <img src="<?= base_url('img/berita/' . $empat[0]['gambar']); ?>"
-                                                style="width: 100% !important; height: 500px !important;"
+                                                style="width: 100% !important; height: 500px !important;  object-fit: cover !important;"
                                                 alt="Main Image" id="mainImage">
                                             <div class="back-btm-content">
 
@@ -131,12 +162,13 @@
                                     <li class="col-lg-3">
                                         <div class="image-areas">
                                             <a><img src="<?= base_url('img/berita/' . $thumbnail['gambar']); ?>"
-                                                    style="width: 200px !important; height: 110px !important;"
+                                                    style="width: 200px !important; height: 110px !important;  object-fit: cover !important;"
                                                     alt="Thumbnail <?= $index; ?>"
                                                     data-large="<?= base_url('img/berita/' . $thumbnail['gambar']); ?>"
                                                     data-judul="<?= $thumbnail['judul']; ?>"
                                                     data-tgl_berita="<?= tanggal_indo($thumbnail['tgl_berita']); ?>"
                                                     data-kategori="<?= $thumbnail['nm_kategori_master']; ?>"
+                                                    data-kategori_url="<?= $thumbnail['url']; ?>"
                                                     data-author="<?= $thumbnail['nama']; ?>"
                                                     data-url="<?= base_url('detail/' . url_title($thumbnail['tgl_berita'], 'dash', TRUE) . '/' . url_title($thumbnail['sub_judul'], 'dash', TRUE)) ?>">
                                             </a>
@@ -157,100 +189,130 @@
                         <ul class="back-hero-bottom back-hero-bottom2 back-hero-rights back-hero-bottom-home3">
                             <li>
                                 <div class="image-areas">
-                                    <a href="#"><img
-                                            src="<?= base_url('template/frontend/assets/')?>assets/images/post/17.jpg"
+                                    <a
+                                        href="<?= base_url('detail/' . url_title($nasional['tgl_berita'], 'dash', TRUE) . '/' . url_title($nasional['sub_judul'], 'dash', TRUE)) ?>"><img
+                                            src="<?= base_url('img/berita/' . $nasional['gambar']); ?>"
+                                            style="width: 200px !important; height: 100px !important; object-fit: cover !important;"
                                             alt="image"></a>
                                 </div>
                                 <div class="back-btm-content">
-                                    <a href="#" class="back-cates">Lifestyle</a>
-                                    <h3><a href="#">Heasellus sint ratebc boi earum morwo occaecat egestas</a></h3>
+                                    <a href="<?= $nasional['url']?>" class="back-cates"
+                                        style="color: #ff1100 !important"><strong><?= $nasional['nm_kategori_master']?></strong></a>
+                                    <h3><a
+                                            href="<?= base_url('detail/' . url_title($nasional['tgl_berita'], 'dash', TRUE) . '/' . url_title($nasional['sub_judul'], 'dash', TRUE)) ?>"><?= $nasional['judul']?></a>
+                                    </h3>
                                     <ul class="back-meta">
-                                        <li class="back-author"><span><img
-                                                    src="<?= base_url('template/frontend/assets/')?>assets/images/author/1.jpg"
-                                                    alt="image"></span><a href="#">by Jon Deo</a></li>
+                                        <li class="back-author"><a href="#">By <?= $nasional['nama']?></a>
+                                        </li>
                                     </ul>
+
                                 </div>
                             </li>
                             <li>
                                 <div class="image-areas">
-                                    <a href="#"><img
-                                            src="<?= base_url('template/frontend/assets/')?>assets/images/post/6.jpg"
+                                    <a
+                                        href="<?= base_url('detail/' . url_title($politik['tgl_berita'], 'dash', TRUE) . '/' . url_title($politik['sub_judul'], 'dash', TRUE)) ?>"><img
+                                            src="<?= base_url('img/berita/' . $politik['gambar']); ?>"
+                                            style="width: 200px !important; height: 100px !important; object-fit: cover !important;"
                                             alt="image"></a>
                                 </div>
                                 <div class="back-btm-content">
-                                    <a href="#" class="back-cates">Sports</a>
-                                    <h3><a href="#">Voluptatum mauris feugiat culpa repellat others</a></h3>
+                                    <a href="<?= $politik['url']?>" class="back-cates"
+                                        style="color: #ff1100 !important"><strong><?= $politik['nm_kategori_master']?></strong></a>
+                                    <h3><a
+                                            href="<?= base_url('detail/' . url_title($politik['tgl_berita'], 'dash', TRUE) . '/' . url_title($politik['sub_judul'], 'dash', TRUE)) ?>"><?= $politik['judul']?></a>
+                                    </h3>
                                     <ul class="back-meta">
-                                        <li class="back-author"><span><img
-                                                    src="<?= base_url('template/frontend/assets/')?>assets/images/author/2.jpg"
-                                                    alt="image"></span><a href="#">by Jon Deo</a></li>
+                                        <li class="back-author"><a href="#">By <?= $politik['nama']?></a></li>
                                     </ul>
+
                                 </div>
                             </li>
                             <li>
                                 <div class="image-areas">
-                                    <a href="#"><img
-                                            src="<?= base_url('template/frontend/assets/')?>assets/images/post/16.jpg"
+                                    <a
+                                        href="<?= base_url('detail/' . url_title($pemerintahan['tgl_berita'], 'dash', TRUE) . '/' . url_title($pemerintahan['sub_judul'], 'dash', TRUE)) ?>"><img
+                                            src="<?= base_url('img/berita/' . $pemerintahan['gambar']); ?>"
+                                            style="width: 200px !important; height: 100px !important; object-fit: cover !important;"
                                             alt="image"></a>
                                 </div>
                                 <div class="back-btm-content">
-                                    <a href="#" class="back-cates">Technology</a>
-                                    <h3><a href="#">Ante aperiam dictum facilis fuga habitant off</a></h3>
+                                    <a href="<?= $pemerintahan['url']?>" class="back-cates"
+                                        style="color: #ff1100 !important"><strong><?= $pemerintahan['nm_kategori_master']?></strong></a>
+                                    <h3><a
+                                            href="<?= base_url('detail/' . url_title($pemerintahan['tgl_berita'], 'dash', TRUE) . '/' . url_title($pemerintahan['sub_judul'], 'dash', TRUE)) ?>"><?= $pemerintahan['judul']?></a>
+                                    </h3>
                                     <ul class="back-meta">
-                                        <li class="back-author"><span><img
-                                                    src="<?= base_url('template/frontend/assets/')?>assets/images/author/3.jpg"
-                                                    alt="image"></span><a href="#">by Jon Deo</a></li>
+                                        <li class="back-author"><a href="#">By <?= $pemerintahan['nama']?></a>
+                                        </li>
                                     </ul>
+
                                 </div>
                             </li>
                             <li>
                                 <div class="image-areas">
-                                    <a href="#"><img
-                                            src="<?= base_url('template/frontend/assets/')?>assets/images/post/8.jpg"
+                                    <a
+                                        href="<?= base_url('detail/' . url_title($hukum['tgl_berita'], 'dash', TRUE) . '/' . url_title($hukum['sub_judul'], 'dash', TRUE)) ?>"><img
+                                            src="<?= base_url('img/berita/' . $hukum['gambar']); ?>"
+                                            style="width: 200px !important; height: 100px !important; object-fit: cover !important;"
                                             alt="image"></a>
                                 </div>
                                 <div class="back-btm-content">
-                                    <a href="#" class="back-cates">Travel</a>
-                                    <h3><a href="#">Bnte aperiam dictum oi facilis fuga ewborna mentors</a></h3>
+                                    <a href="<?= $hukum['url']?>" class="back-cates"
+                                        style="color: #ff1100 !important"><strong><?= $hukum['nm_kategori_master']?></strong></a>
+                                    <h3><a
+                                            href="<?= base_url('detail/' . url_title($hukum['tgl_berita'], 'dash', TRUE) . '/' . url_title($hukum['sub_judul'], 'dash', TRUE)) ?>"><?= $hukum['judul']?></a>
+                                    </h3>
                                     <ul class="back-meta">
-                                        <li class="back-author"><span><img
-                                                    src="<?= base_url('template/frontend/assets/')?>assets/images/author/1.jpg"
-                                                    alt="image"></span><a href="#">by Jon Deo</a></li>
+                                        <li class="back-author"><a href="#">By <?= $hukum['nama']?></a>
+                                        </li>
                                     </ul>
+
                                 </div>
                             </li>
                             <li>
                                 <div class="image-areas">
-                                    <a href="#"><img
-                                            src="<?= base_url('template/frontend/assets/')?>assets/images/post/9.jpg"
+                                    <a
+                                        href="<?= base_url('detail/' . url_title($religi['tgl_berita'], 'dash', TRUE) . '/' . url_title($religi['sub_judul'], 'dash', TRUE)) ?>"><img
+                                            src="<?= base_url('img/berita/' . $religi['gambar']); ?>"
+                                            style="width: 200px !important; height: 100px !important; object-fit: cover !important;"
                                             alt="image"></a>
                                 </div>
                                 <div class="back-btm-content">
-                                    <a href="#" class="back-cates">Food</a>
-                                    <h3><a href="#">Tempore imperdiet rhoncus ipsam lobortis off others.</a></h3>
+                                    <a href="<?= $religi['url']?>" class="back-cates"
+                                        style="color: #ff1100 !important"><strong><?= $religi['nm_kategori_master']?></strong></a>
+                                    <h3><a
+                                            href="<?= base_url('detail/' . url_title($religi['tgl_berita'], 'dash', TRUE) . '/' . url_title($religi['sub_judul'], 'dash', TRUE)) ?>"><?= $religi['judul']?></a>
+                                    </h3>
                                     <ul class="back-meta">
-                                        <li class="back-author"><span><img
-                                                    src="<?= base_url('template/frontend/assets/')?>assets/images/author/1.jpg"
-                                                    alt="image"></span><a href="#">by Jon Deo</a></li>
+                                        <li class="back-author"><a href="#">By <?= $religi['nama']?></a>
+                                        </li>
                                     </ul>
+
                                 </div>
                             </li>
                             <li>
                                 <div class="image-areas">
-                                    <a href="#"><img
-                                            src="<?= base_url('template/frontend/assets/')?>assets/images/post/11.jpg"
+                                    <a
+                                        href="<?= base_url('detail/' . url_title($olahraga['tgl_berita'], 'dash', TRUE) . '/' . url_title($olahraga['sub_judul'], 'dash', TRUE)) ?>"><img
+                                            src="<?= base_url('img/berita/' . $olahraga['gambar']); ?>"
+                                            style="width: 200px !important; height: 100px !important; object-fit: cover !important;"
                                             alt="image"></a>
                                 </div>
                                 <div class="back-btm-content">
-                                    <a href="#" class="back-cates">Lifestyle</a>
-                                    <h3><a href="#">Occaecat egestas incididunt mauris lectus orking</a></h3>
+                                    <a href="<?= $olahraga['url']?>" class="back-cates"
+                                        style="color: #ff1100 !important"><strong><?= $olahraga['nm_kategori_master']?></strong></a>
+                                    <h3><a
+                                            href="<?= base_url('detail/' . url_title($olahraga['tgl_berita'], 'dash', TRUE) . '/' . url_title($olahraga['sub_judul'], 'dash', TRUE)) ?>"><?= $olahraga['judul']?></a>
+                                    </h3>
                                     <ul class="back-meta">
-                                        <li class="back-author"><span><img
-                                                    src="<?= base_url('template/frontend/assets/')?>assets/images/author/2.jpg"
-                                                    alt="image"></span><a href="#">by Jon Deo</a></li>
+                                        <li class="back-author"><a href="#">By <?= $olahraga['nama']?></a>
+                                        </li>
                                     </ul>
+
                                 </div>
                             </li>
+
                         </ul>
                     </div>
                 </div>
@@ -261,230 +323,94 @@
             class="back-hero-area back-latest-posts back-whats-posts back-feature-posts back-feature-posts-latest back-live-news">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8">
-                        <div class="back-title">
+
+                    <div class="col-lg-8 pl-30">
+                        <div class="back-title back-small-title pt-30">
                             <h2>Berita Terbaru</h2>
                         </div>
-                        <div class="back-trending-stories back-trending-stories-home2">
-                            <div class="row">
-                                <ul class="row">
-                                    <li class="col-lg-6">
-                                        <div class="image-areas">
-                                            <a href="#"><img
-                                                    src="<?= base_url('template/frontend/assets/')?>assets/images/latest-news/6.jpg"
-                                                    alt="image"></a>
-                                        </div>
-                                        <div class="back-btm-content">
-                                            <a href="#" class="back-cates">News</a>
-                                            <h3><a href="#">COVID patient successfully given vaccine fully treatment our
-                                                    board with a healthy</a></h3>
-                                            <ul>
-                                                <li class="back-author">by <a href="#">Jon Deo</a></li>
-                                                <li class="back-date"><span><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-clock">
-                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                            <polyline points="12 6 12 12 16 14"></polyline>
-                                                        </svg></span>April 29, 2022</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="col-lg-6">
-                                        <div class="image-areas">
-                                            <a href="#"><img
-                                                    src="<?= base_url('template/frontend/assets/')?>assets/images/trending/2.jpg"
-                                                    alt="image"></a>
-                                        </div>
-                                        <div class="back-btm-content">
-                                            <a href="#" class="back-cates">Travel</a>
-                                            <h3><a href="#">Selective focus photography of orange fox life insurence
-                                                    save a life no earth</a></h3>
-                                            <ul>
-                                                <li class="back-author">by <a href="#"> Jon Deo</a></li>
-                                                <li class="back-date"><span><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-clock">
-                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                            <polyline points="12 6 12 12 16 14"></polyline>
-                                                        </svg></span>March 25, 2022</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="row">
-                                    <li class="col-lg-4">
-                                        <div class="image-areas">
-                                            <a href="#"><img
-                                                    src="<?= base_url('template/frontend/assets/')?>assets/images/latest-news/8.jpg"
-                                                    alt="image"></a>
-                                        </div>
-                                        <div class="back-btm-content">
-                                            <a href="#" class="back-cates">Sports</a>
-                                            <h3><a href="#">tUNAI Android trending sneaker models give world cup
-                                                    sibe</a></h3>
-                                            <ul>
-                                                <li class="back-author">by <a href="#"> Jon Deo</a></li>
-                                                <li class="back-date"><span><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-clock">
-                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                            <polyline points="12 6 12 12 16 14"></polyline>
-                                                        </svg></span>May 29, 2022</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="col-lg-4">
-                                        <div class="image-areas">
-                                            <a href="#"><img
-                                                    src="<?= base_url('template/frontend/assets/')?>assets/images/latest-news/7.jpg"
-                                                    alt="image"></a>
-                                        </div>
-                                        <div class="back-btm-content">
-                                            <a href="#" class="back-cates">Politics</a>
-                                            <h3><a href="#">Treat your planet like you want to treat to our fimail
-                                                    workers.</a></h3>
-                                            <ul>
-                                                <li class="back-author">by <a href="#"> Jon Deo</a></li>
-                                                <li class="back-date"><span><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-clock">
-                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                            <polyline points="12 6 12 12 16 14"></polyline>
-                                                        </svg></span>June 20, 2022</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="col-lg-4">
-                                        <div class="image-areas">
-                                            <a href="#"><img
-                                                    src="<?= base_url('template/frontend/assets/')?>assets/images/trending/5.jpg"
-                                                    alt="image"></a>
-                                        </div>
-                                        <div class="back-btm-content">
-                                            <a href="#" class="back-cates">Technology</a>
-                                            <h3><a href="#">Virtual reality is here on leather by pink working world
-                                                    mentor</a></h3>
-                                            <ul>
-                                                <li class="back-author">by <a href="#"> Jon Deo</a></li>
-                                                <li class="back-date"><span><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-clock">
-                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                            <polyline points="12 6 12 12 16 14"></polyline>
-                                                        </svg></span>June 20, 2022</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 pl-30">
-                        <div class="back-title back-small-title">
-                            <h2>Stay Connected</h2>
-                        </div>
-                        <ul class="social-area2">
+                        <ul class="back-hero-bottom back-hero-bottom3">
+                            <?php foreach($terbaru as $baru):?>
                             <li>
-                                <div><a href="#"><i class="fa-brands fa-facebook-f"></i></a> <span>Followers
-                                        <em>750</em></span></div>
+                                <div class="image-areas">
+                                    <a
+                                        href="<?= base_url('detail/' . url_title($baru['tgl_berita'], 'dash', TRUE) . '/' . url_title($baru['sub_judul'], 'dash', TRUE)) ?>"><img
+                                            style="width: 1024px !important; height: 150px !important; object-fit: cover !important;"
+                                            src="<?= base_url('img/berita/' . $baru['gambar']); ?>" alt="image"></a>
+                                </div>
+                                <div class="back-btm-content">
+                                    <a href="<?= base_url($baru['url'])?>" class="back-cates"
+                                        style="color: #f2db0a !important"><?= $baru['nm_kategori_master'] ?></a>
+                                    <h3><a
+                                            href="
+                                            <?= base_url('detail/' . url_title($baru['tgl_berita'], 'dash', TRUE) . '/' . url_title($baru['sub_judul'], 'dash', TRUE)) ?>"><?= $baru['judul'] ?></a>
+                                    </h3>
+
+                                    <ul class="back-meta">
+                                        <li class="back-author" style="color: #dae2eb !important">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-user-fill">
+                                                    <path
+                                                        d="M20.24 24s-1.5-2.42-4.24-3.66C14 19.34 12 20 12 20s-2-.66-3.99-1.66C5.26 21.58 3.76 24 3.76 24z" />
+                                                    <circle cx="12" cy="10" r="3" />
+                                                </svg>
+                                            </span>
+                                            <span>
+                                                <a href="#" style="color: #dae2eb !important">By <?= $baru['nama']?></a>
+                                            </span>
+                                        </li>
+                                        <li class="back-date" style="color: #dae2eb !important">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-clock">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                                </svg>
+                                            </span>
+                                            <span><?= tanggal_indo($baru['tgl_berita'])?></span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
                             </li>
-                            <li>
-                                <div><a href="#"><i class="fa-brands fa-twitter"></i></a> <span>Fans
-                                        <em>1236</em></span></div>
-                            </li>
-                            <li>
-                                <div><a href="#"><i class="fa-brands fa-instagram"></i></a> <span>Likes
-                                        <em>523</em></span></div>
-                            </li>
-                            <li>
-                                <div><a href="#"><i class="fa-brands fa-vimeo-v"></i></a> <span>Comments
-                                        <em>790</em></span></div>
-                            </li>
-                            <li>
-                                <div><a href="#"><i class="fa-brands fa-linkedin-in"></i></a> <span>Followers
-                                        <em>1025</em></span></div>
-                            </li>
-                            <li>
-                                <div><a href="#"><i class="fa-brands fa-youtube"></i></a> <span>Subscribers
-                                        <em>590M</em></span></div>
-                            </li>
+                            <?php endforeach; ?>
+
                         </ul>
+                    </div>
+                    <div class=" col-lg-4 pl-30">
                         <div class="back-title back-small-title pt-30">
-                            <h2>Banyak Dibaca</h2>
+                            <h2>Terpopuler</h2>
                         </div>
                         <ul class="back-hero-bottom back-hero-bottom3">
+                            <?php
+                            $no = 1 ;
+                            foreach($populer as $pop):?>
+
                             <li>
-                                <div class="image-areas">
-                                    <a href="#"><img
-                                            src="<?= base_url('template/frontend/assets/')?>assets/images/read/1.jpg"
-                                            alt="image"></a>
+                                <div class="button-isal">
+                                    <button class="btn btn-primary"><?=$no++?></button>
                                 </div>
                                 <div class="back-btm-content">
-                                    <a href="#" class="back-cates">Politics</a>
-                                    <h3><a href="#">Save the earth, save a life no earth, no life health.</a></h3>
+                                    <h3><a
+                                            href="
+                                            <?= base_url('detail/' . url_title($pop['tgl_berita'], 'dash', TRUE) . '/' . url_title($pop['sub_judul'], 'dash', TRUE)) ?>"><?= $pop['judul'] ?></a>
+                                    </h3>
                                 </div>
+
                             </li>
-                            <li>
-                                <div class="image-areas">
-                                    <a href="#"><img
-                                            src="<?= base_url('template/frontend/assets/')?>assets/images/read/2.jpg"
-                                            alt="image"></a>
-                                </div>
-                                <div class="back-btm-content">
-                                    <a href="#" class="back-cates">Technology</a>
-                                    <h3><a href="#">That woman comes from heaven just for me working</a></h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="image-areas">
-                                    <a href="#"><img
-                                            src="<?= base_url('template/frontend/assets/')?>assets/images/read/11.jpg"
-                                            alt="image"></a>
-                                </div>
-                                <div class="back-btm-content">
-                                    <a href="#" class="back-cates">Politics</a>
-                                    <h3><a href="#">Brighten up your day with solar amd eco power man</a></h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="image-areas">
-                                    <a href="#"><img
-                                            src="<?= base_url('template/frontend/assets/')?>assets/images/read/12.jpg"
-                                            alt="image"></a>
-                                </div>
-                                <div class="back-btm-content">
-                                    <a href="#" class="back-cates">News</a>
-                                    <h3><a href="#">Leveraging tech to drive a better IT experience others</a></h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="image-areas">
-                                    <a href="#"><img
-                                            src="<?= base_url('template/frontend/assets/')?>assets/images/read/5.jpg"
-                                            alt="image"></a>
-                                </div>
-                                <div class="back-btm-content">
-                                    <a href="#" class="back-cates">Lifestyle</a>
-                                    <h3><a href="#">Green leaves photo plant the with cute girl modeling</a></h3>
-                                </div>
-                            </li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="back-trading-video back-trading-video2">
+        <!-- <div class="back-trading-video back-trading-video2">
             <div class="container">
                 <div class="back-title">
                     <h2>Trading Video</h2>
@@ -561,7 +487,7 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
 
         <div class="footer-divider"></div>
     </div>
@@ -591,6 +517,7 @@
             mainImage.src = thumbnails[index].dataset.large;
             mainTitle.href = thumbnails[index].dataset.url;
             mainTitle.textContent = thumbnails[index].dataset.judul;
+            mainCategory.href = thumbnails[index].dataset.kategori_url;
             mainCategory.textContent = thumbnails[index].dataset.kategori;
             mainDatee.textContent = thumbnails[index].dataset.tgl_berita;
             mainAuthor.textContent = `By ${thumbnails[index].dataset.author}`;
@@ -617,7 +544,50 @@
         });
     });
     </script>
+    <script>
+    function adjustTitleWidth() {
+        document.querySelectorAll('.back-hero-bottom3 .back-btm-content h3').forEach(function(title) {
+            if (window.innerWidth <= 490) {
+                title.style.maxWidth = 'auto';
+                title.style.overflow = 'hidden';
+                title.style.textOverflow = 'ellipsis';
+                title.style.whiteSpace = 'nowrap';
+            } else {
+                title.style.maxWidth = '';
+                title.style.overflow = '';
+                title.style.textOverflow = '';
+                title.style.whiteSpace = '';
+            }
+        });
 
+        document.querySelectorAll('.back-hero-bottom3 .back-btm-content  .back-cates').forEach(function(url) {
+            if (window.innerWidth <= 490) {
+                url.style.fontSize = '8px';
+            } else {
+                url.style.fontSize = '11px';
+            }
+        });
+        document.querySelectorAll('.back-hero-bottom3 .back-btm-content  .back-meta .back-author').forEach(function(
+            isal) {
+            if (window.innerWidth <= 490) {
+                isal.style.fontSize = '7px';
+            } else {
+                isal.style.fontSize = '10px';
+            }
+        });
+        document.querySelectorAll('.back-hero-bottom3 .back-btm-content  .back-meta .back-date').forEach(function(
+            isal2) {
+            if (window.innerWidth <= 490) {
+                isal2.style.fontSize = '7px';
+            } else {
+                isal2.style.fontSize = '10px';
+            }
+        });
+    }
+
+    window.addEventListener('resize', adjustTitleWidth);
+    window.addEventListener('DOMContentLoaded', adjustTitleWidth);
+    </script>
 </body>
 
 </html>

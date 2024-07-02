@@ -24,7 +24,6 @@ class BeritaController extends CI_Controller
     {   
         $data['title'] = 'Tambah Berita';
         $id_kategori = $this->input->post('id_kategori');
-        
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         
         $data['kategori']  = $this->Berita_model->get_kategori();
@@ -72,6 +71,15 @@ class BeritaController extends CI_Controller
         
             $this->load->library('upload', $config);
         
+            
+            $role_id = $this->input->post('role_id');
+
+            $status = 3;
+
+            if ($role_id == 1) {
+                $status = 1;
+            }
+
             if (!$this->upload->do_upload('gambar')) {
                 $error = $this->upload->display_errors();
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $error . '</div>');
@@ -92,8 +100,9 @@ class BeritaController extends CI_Controller
                     'tgl_berita' => $this->input->post('tgl_berita'),
                     'headline' => $this->input->post('headline'),
                     'youtube' => $this->input->post('youtube'),
+                    'jam' => $this->input->post('jam'),
                     'dibaca' => 0,
-                    'status' => 3,
+                    'status' => $status,
                     'aktif' => "Y"
                 ];
     
@@ -110,28 +119,7 @@ class BeritaController extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berita Berhasil ditambahkan!</div>');
         }
     }
-    
-    public function check_upload($str)
-    {
-        if (empty($_FILES['gambar']['name']) && empty($_FILES['gambar']['tmp_name'])) {
-            $this->form_validation->set_message('check_upload', 'Gambar Tidak Boleh Kosong');
-            return false;
-        } else {
-            return true;
-        }
-    }
 
-    public function detail($id)
-    {
-        $data['title'] = 'Detail Berita';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $this->db->select('*');
-        $this->db->from('tb_berita');
-        $this->db->where('tb_berita.id_berita',$id);
-        $data['berita'] = $this->db->get()->row_array();
-        $this->load->view('backend/berita_detail',$data);
-    }
-    
     public function edit($id)
     {
         $data['title'] = 'Edit Berita';
@@ -158,6 +146,15 @@ class BeritaController extends CI_Controller
         $this->form_validation->set_rules('tgl_berita', 'Tanggal Berita', 'required', [
             "required" => "Tanggal Berita Tidak Boleh Kosong"
         ]);
+        $this->form_validation->set_rules('gambar', 'Gambar', 'callback_check_upload');
+
+        
+        $role_id = $this->input->post('role_id');
+
+        $status = 3;
+        if ($role_id == 1) {
+            $status = 1;
+        }
 
         if ($this->form_validation->run() == false) {
             $this->load->view('backend/berita_e', $data);
@@ -187,7 +184,7 @@ class BeritaController extends CI_Controller
             if ($this->upload->do_upload('gambar')) {
                 $upload_data = $this->upload->data();
                 $gambar = $upload_data['file_name'];
-                if ($data['berita']['gambar']) {
+                if ($data['berita']['gambar'] && file_exists('./img/berita/' . $data['berita']['gambar'])) {
                     unlink('./img/berita/' . $data['berita']['gambar']);
                 }
             } else {
@@ -206,7 +203,7 @@ class BeritaController extends CI_Controller
                 'tgl_berita' => $this->input->post('tgl_berita'),
                 'headline' => $this->input->post('headline'),
                 'youtube' => $this->input->post('youtube'),
-                'status' => 3
+                'status' => $status
             ];
 
             $this->db->where('id_berita', $id);
@@ -222,4 +219,55 @@ class BeritaController extends CI_Controller
         }
         
     }
+
+    public function hapus($id)
+{
+    // Dapatkan data berita berdasarkan ID
+    $berita = $this->db->get_where('tb_berita', ['id_berita' => $id])->row_array();
+
+    if ($berita) {
+  
+        if ($berita['gambar'] && file_exists('./img/berita/' . $berita['gambar'])) {
+            unlink('./img/berita/' . $berita['gambar']);
+        }
+        $this->db->where('id_berita', $id);
+        if ($this->db->delete('tb_berita')) {
+            $this->session->set_flashdata('message_type', 'success');
+            $this->session->set_flashdata('message', 'Berita berhasil dihapus!');
+        } else {
+            $this->session->set_flashdata('message_type', 'error');
+            $this->session->set_flashdata('message', 'Gagal menghapus berita!');
+        }
+    } else {
+        $this->session->set_flashdata('message_type', 'error');
+        $this->session->set_flashdata('message', 'Berita tidak ditemukan!');
+    }
+
+    // Redirect kembali ke halaman berita
+    redirect('rj/berita');
+}
+    
+    public function check_upload($str)
+    {
+        if (empty($_FILES['gambar']['name']) && empty($_FILES['gambar']['tmp_name'])) {
+            $this->form_validation->set_message('check_upload', 'Gambar Tidak Boleh Kosong');
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function detail($id)
+    {
+        $data['title'] = 'Detail Berita';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->db->select('*');
+        $this->db->from('tb_berita');
+        $this->db->where('tb_berita.id_berita',$id);
+        $data['berita'] = $this->db->get()->row_array();
+        $this->load->view('backend/berita_detail',$data);
+    }
+    
+  
+
 }

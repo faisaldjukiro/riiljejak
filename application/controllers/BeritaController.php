@@ -7,17 +7,20 @@ class BeritaController extends CI_Controller
 	public function index()
 	{
 		$data['title'] = "Berita";
-
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ', 'a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
-		
+		$this->db->where('a.status', 1);
 		$id_kategori_master = array(1,2,3,4,5,6,7,8,9,10);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
-		
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);			
+			
 		}
 		
 		$this->db->order_by('a.id_berita', 'desc');
@@ -25,7 +28,7 @@ class BeritaController extends CI_Controller
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		$data['berita'] = $isal;
 		$this->load->view('frontend/listberita', $data);
@@ -33,17 +36,21 @@ class BeritaController extends CI_Controller
 	public function internasional()
 	{
 		$data['title'] = "Internasional";
-
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
 		
 		$id_kategori_master = array(1);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 
@@ -51,7 +58,7 @@ class BeritaController extends CI_Controller
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -61,23 +68,27 @@ class BeritaController extends CI_Controller
 	public function nasional()
 	{
 		$data['title'] = "Nasional";
-
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
 		
-		$id_kategori_master = array(2,3,4);
+		$id_kategori_master = array(22);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -87,23 +98,27 @@ class BeritaController extends CI_Controller
 	public function hukum()
 	{
 		$data['title'] = "Hukum";
-
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
 		
 		$id_kategori_master = array(2);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -113,23 +128,28 @@ class BeritaController extends CI_Controller
 	public function politik()
 	{
 		$data['title'] = "Politik";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
 		
 		$id_kategori_master = array(3);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -140,21 +160,27 @@ class BeritaController extends CI_Controller
 	public function pemerintahan()
 	{
 		$data['title'] = "Pemerintahan";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(4);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -164,20 +190,26 @@ class BeritaController extends CI_Controller
 	public function daerah()
 	{
 		$data['title'] = "Daerah";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		$id_kategori_master = array(5,6,7,8,9,10);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -187,22 +219,28 @@ class BeritaController extends CI_Controller
 	public function sulawesi_utara()
 	{
 		$data['title'] = "Sulawesi Utara";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(5,6,7);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -212,21 +250,27 @@ class BeritaController extends CI_Controller
 	public function bolmut()
 	{
 		$data['title'] = "Bolaang Mongondow Utara";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(5);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -236,21 +280,27 @@ class BeritaController extends CI_Controller
 	public function bolsel()
 	{
 		$data['title'] = "Bolaang Mongondow Selatan";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(6);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -260,21 +310,27 @@ class BeritaController extends CI_Controller
 	public function boltim()
 	{
 		$data['title'] = "Bolaang Mongondow Timur";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(7);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -284,21 +340,27 @@ class BeritaController extends CI_Controller
 	public function gorontalo()
 	{
 		$data['title'] = "Gorontalo";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(8,9,10);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -308,21 +370,27 @@ class BeritaController extends CI_Controller
 	public function kota_gorontalo()
 	{
 		$data['title'] = "Kota Gorontalo";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(8);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -332,21 +400,27 @@ class BeritaController extends CI_Controller
 	public function kabupaten_gorontalo()
 	{
 		$data['title'] = "Kabupaten Gorontalo";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(9);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -356,21 +430,27 @@ class BeritaController extends CI_Controller
 	public function gorontalo_utara()
 	{
 		$data['title'] = "Gorontalo Utara";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(10);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		$data['berita'] = $isal;
 		$this->load->view('frontend/listberita', $data);
@@ -379,15 +459,21 @@ class BeritaController extends CI_Controller
 	public function ragam()
 	{
 		$data['title'] = "Ragam";
-		$this->db->select('a.id_kategori_master,a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		$id_kategori_master = array(11,12,13,14,15,16,18,19,20,21);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		
 		$this->db->order_by('a.id_berita', 'desc');
@@ -395,7 +481,7 @@ class BeritaController extends CI_Controller
 		
 		$isal = $this->db->get()->result_array();
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		$data['berita'] = $isal;
 		$this->load->view('frontend/listberita', $data);
@@ -403,21 +489,27 @@ class BeritaController extends CI_Controller
 	public function budaya()
 	{
 		$data['title'] = "Budaya";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(11);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -427,21 +519,27 @@ class BeritaController extends CI_Controller
 	public function seni()
 	{
 		$data['title'] = "Seni";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(12);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -451,21 +549,27 @@ class BeritaController extends CI_Controller
 	public function keanekaragaman_hayati()
 	{
 		$data['title'] = "Keanekaragaman Hayati";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(13);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -475,21 +579,27 @@ class BeritaController extends CI_Controller
 	public function pariwisata()
 	{
 		$data['title'] = "Pariwisata";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(14);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -499,21 +609,27 @@ class BeritaController extends CI_Controller
 	public function komoditas()
 	{
 		$data['title'] = "Komoditas";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(15);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -523,21 +639,27 @@ class BeritaController extends CI_Controller
 	public function kuliner()
 	{
 		$data['title'] = "Kuliner";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(16);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -547,21 +669,27 @@ class BeritaController extends CI_Controller
 	public function lingkungan()
 	{
 		$data['title'] = "Lingkungan";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(18);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -571,21 +699,26 @@ class BeritaController extends CI_Controller
 	public function kesehatan()
 	{
 		$data['title'] = "Kesehatan";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
 		
 		$id_kategori_master = array(19);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -595,21 +728,27 @@ class BeritaController extends CI_Controller
 	public function religi()
 	{
 		$data['title'] = "Religi";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
-		$this->db->where('a.aktif', Y);
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
+		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+
 		
 		$id_kategori_master = array(21);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -619,19 +758,26 @@ class BeritaController extends CI_Controller
 	public function olahraga()
 	{
 		$data['title'] = "Olahraga";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
-		$this->db->where('a.aktif', Y);
-		$this->db->order_by('a.id_berita', 'desc');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
+		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
 		
 		$id_kategori_master = array(20);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
-		
+		foreach ($id_kategori_master as $id) {
+			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
+		}
+		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -641,20 +787,26 @@ class BeritaController extends CI_Controller
 	public function infografis()
 	{
 		$data['title'] = "Infografis";
-		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama');
+		$data['populer'] = $this->_populer();
+		$this->db->select('a.judul,a.tgl_berita,a.sub_judul,a.gambar,a.isi_berita,b.nama,a.jam,c.nm_kategori_master,c.url');
 		$this->db->from('tb_berita a');
 		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->join('tb_kategori_master c ','a.id_kategori = c.id_kat_master');
 		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.status', 1);
+		$this->db->where('a.status', '1');
 		$id_kategori_master = array(17);
 		$this->db->where_in('a.id_kategori_master', $id_kategori_master);
 		foreach ($id_kategori_master as $id) {
 			$this->db->or_where("FIND_IN_SET($id, a.id_kategori_master) >", 0);
+			$this->db->where('a.aktif', "Y");
+			$this->db->where('a.status', 1);
 		}
 		$this->db->order_by('a.id_berita', 'desc');
 		$isal = $this->db->get()->result_array();
 		
 		foreach ($isal as &$item) {
-			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 25);
+			$item['isi_berita'] = $this->ambil_kata($item['isi_berita'], 17, 100);
 		}
 		
 		$data['berita'] = $isal;
@@ -670,22 +822,76 @@ class BeritaController extends CI_Controller
 
 	public function detail($tgl_buat,$sub_judul)
 	{
-		
+		$data['populer'] = $this->_populer();
 		$sub_judul = urldecode($sub_judul);
-
-        $this->db->select('a.judul, a.tgl_berita, a.sub_judul, a.gambar, a.isi_berita, b.nama, a.keterangan_gambar,a.tag,a.jam');
-        $this->db->from('tb_berita a');
-        $this->db->join('user b', 'a.id_user = b.id_user');
-        $this->db->where('a.aktif', "Y");
-        $this->db->where('a.tgl_berita', $tgl_buat);
-        $this->db->where('a.sub_judul', $sub_judul);
-        $data['berita_detail'] = $this->db->get()->row_array();
-        if (isset($data['berita_detail']['judul'])) {
-            $data['title'] = $data['berita_detail']['judul'];
-        } else {
-            $data['title'] = "Berita tidak ditemukan";
-        }
+	
+		$this->db->select('a.id_berita, a.judul, a.tgl_berita, a.sub_judul, a.gambar, a.isi_berita, b.nama, a.keterangan_gambar, a.tag, a.jam, a.id_kategori');
+		$this->db->from('tb_berita a');
+		$this->db->join('user b', 'a.id_user = b.id_user');
+		$this->db->where('a.aktif', "Y");
+		$this->db->where('a.tgl_berita', $tgl_buat);
+		$this->db->where('a.sub_judul', $sub_judul);
+		$data['berita_detail'] = $this->db->get()->row_array();
+	
+		if (isset($data['berita_detail']['judul'])) {
+			$data['title'] = $data['berita_detail']['judul'];
+			$id_berita = $data['berita_detail']['id_berita'];
+			$id_kategori = $data['berita_detail']['id_kategori'];
+	
+			$this->db->set('dibaca', 'dibaca+1', FALSE);
+			$this->db->where('id_berita', $id_berita);
+			$this->db->update('tb_berita');
+	
+			// Dapatkan berita sebelumnya
+			$this->db->select("IF(LENGTH(judul) > 35, CONCAT(LEFT(judul, 35), '...'), judul) AS judul, id_berita, tgl_berita, sub_judul");
+			$this->db->from('tb_berita');
+			$this->db->where('id_berita <', $id_berita);
+			$this->db->where('aktif', 'Y');
+			$this->db->where('status', '1');
+			$this->db->order_by('id_berita', 'DESC');
+			$this->db->limit(1);
+			$data['previous_news'] = $this->db->get()->row_array();
+	
+			// Dapatkan berita selanjutnya
+			$this->db->select("IF(LENGTH(judul) > 35, CONCAT(LEFT(judul, 35), '...'), judul) AS judul, id_berita, tgl_berita, sub_judul");
+			$this->db->from('tb_berita');
+			$this->db->where('id_berita >', $id_berita);
+			$this->db->where('aktif', 'Y');
+			$this->db->where('status', '1');
+			$this->db->order_by('id_berita', 'ASC');
+			$this->db->limit(1);
+			$data['next_news'] = $this->db->get()->row_array();
+	
+			// Dapatkan berita terkait berdasarkan id_kategori
+			$this->db->select("id_berita, IF(LENGTH(judul) > 35, CONCAT(LEFT(judul, 35), '...'), judul) AS judul, tgl_berita, sub_judul, gambar");
+			$this->db->from('tb_berita');
+			$this->db->where('id_kategori', $id_kategori);
+			$this->db->where('id_berita !=', $id_berita); // Tidak termasuk berita saat ini
+			$this->db->where('aktif', 'Y');
+			$this->db->where('status', '1');
+			$this->db->order_by('id_berita', 'DESC');
+			$this->db->limit(3);
+			$data['related_news'] = $this->db->get()->result_array();
+			
+		} else {
+			$data['title'] = "Berita tidak ditemukan";
+		}
+	
 		$this->load->view('frontend/detailberita', $data);
 	}
+	  public function _populer()
+    {
+        $this->db->select("IF(LENGTH(a.judul) > 80, CONCAT(LEFT(a.judul, 80), '...'), a.judul) AS judul, a.sub_judul, a.tgl_berita, a.gambar,b.nm_kategori_master,c.nama,b.url");
+        $this->db->from("tb_berita a");
+        $this->db->join('tb_kategori_master b', 'b.id_kat_master = a.id_kategori');
+        $this->db->join('user c', 'c.id_user = a.id_user');
+        $this->db->order_by('a.dibaca', 'DESC');
+		$this->db->where('a.status', '1');
+        $this->db->limit(10);
+        $query = $this->db->get();
+        $results = $query->result_array();
+        return $results;
+    }
+	
 
 }

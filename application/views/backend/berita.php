@@ -3,6 +3,8 @@
 
 <head>
     <?php $this->load->view('backend/template/head') ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
     .table.datatable {
         border-collapse: collapse;
@@ -96,15 +98,18 @@
                                             <a type="button"
                                                 href="<?= base_url('rj/berita/detail/') . $sm['id_berita']; ?>"
                                                 class="badge bg-success"><i class="bi bi-eye"></i></a>
+
                                             <a type="button"
                                                 href="<?= base_url('rj/berita/edit/') . $sm['id_berita']; ?>"
                                                 class="badge bg-info"><i class="bi bi-pencil"></i></a>
-                                            <a type="button"
+
+                                            <a type="button" class="hapus badge bg-danger"
+                                                href="<?= base_url('rj/berita/hapus/') . $sm['id_berita']; ?>"><i
+                                                    class="bi bi-trash"></i></a>
+
+                                            <!-- <a type="button"
                                                 href="<?= base_url('transaksi/obat-masuk-edit/') . $sm['id_berita']; ?>"
-                                                class="badge bg-danger"><i class="bi bi-trash"></i></a>
-                                            <a type="button"
-                                                href="<?= base_url('transaksi/obat-masuk-edit/') . $sm['id_berita']; ?>"
-                                                class="badge bg-warning"><i class="bi bi-pencil"></i></a>
+                                                class="badge bg-warning"><i class="bi bi-pencil"></i></a> -->
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
@@ -123,6 +128,74 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
     <?php $this->load->view('backend/template/js') ?>
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Pilih semua elemen dengan kelas 'hapus'
+        const deleteButtons = document.querySelectorAll('.hapus');
+
+        deleteButtons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                const href = this.href;
+
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: "btn btn-success",
+                        cancelButton: "btn btn-danger",
+                        popup: 'swal2-popup-custom'
+                    },
+                    buttonsStyling: true
+                });
+                swalWithBootstrapButtons.fire({
+                    title: "Apa kamu yakin?",
+                    text: "Anda tidak akan dapat mengembalikan berita ini!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Hapus",
+                    cancelButtonText: "Batal",
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(href, {
+                            method: 'GET' // atau 'POST' tergantung dari konfigurasi controller
+                        }).then(response => {
+                            if (response.ok) {
+                                swalWithBootstrapButtons.fire({
+                                    title: "Hapus",
+                                    text: "Berita Anda telah dihapus.",
+                                    icon: "success"
+                                }).then(() => {
+                                    location
+                                        .reload(); // Reload halaman setelah penghapusan berhasil
+                                });
+                            } else {
+                                swalWithBootstrapButtons.fire({
+                                    title: "Error",
+                                    text: "Terjadi kesalahan saat menghapus berita.",
+                                    icon: "error"
+                                });
+                            }
+                        }).catch(error => {
+                            swalWithBootstrapButtons.fire({
+                                title: "Error",
+                                text: "Terjadi kesalahan saat menghapus berita.",
+                                icon: "error"
+                            });
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        swalWithBootstrapButtons.fire({
+                            title: "Batal",
+                            text: "Anda batal menghapus berita ini",
+                            icon: "error"
+                        });
+                    }
+                });
+            });
+        });
+    });
     </script>
 
 </body>

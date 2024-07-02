@@ -52,7 +52,25 @@ function set(e) {
 }
 </script>
 
-<!-- <script type="text/javascript">
+
+<script async type="application/javascript" src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
+<script>
+(self.SWG_BASIC = self.SWG_BASIC || []).push(basicSubscriptions => {
+    basicSubscriptions.init({
+        type: "NewsArticle",
+        isPartOfType: ["Product"],
+        isPartOfProductId: "CAowovauDA:openaccess",
+        clientOptions: {
+            theme: "light",
+            lang: "id"
+        },
+    });
+});
+</script>
+
+
+<!-- 
+<script type="text/javascript">
 document.addEventListener('contextmenu', event => event.preventDefault());
 
 document.onkeydown = function(e) {
